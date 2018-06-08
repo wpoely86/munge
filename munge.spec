@@ -84,11 +84,9 @@ getent passwd munge >/dev/null || \
 exit 0
 
 %post
-if [ ! -e %{_sysconfdir}/munge/munge.key -a -c /dev/urandom ]; then
-    dd if=/dev/urandom bs=1 count=1024 \
-        >%{_sysconfdir}/munge/munge.key 2>/dev/null
-    chown munge:munge %{_sysconfdir}/munge/munge.key
-    chmod 0400 %{_sysconfdir}/munge/munge.key
+if [ ! -e %{_sysconfdir}/munge/munge.key ]; then
+    echo "Run %{_sbindir}/mungekey as the munge user to create a key."
+    echo "See the mungekey(8) manpage for more information."
 fi
 %systemd_post munge.service
 
