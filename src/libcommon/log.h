@@ -112,5 +112,13 @@ void log_msg (int priority, const char *format, ...);
  *    the printf-style [format] string.
  */
 
+void log_err_or_warn (int got_force, const char *format, ...);
+/*
+ *  Logs a fatal message with the printf-style [format] string followed by text
+ *    indicating the error can be overridden via the --force command-line
+ *    option.  If that option is specified, the error is converted to a
+ *    non-fatal warning.
+ */
+
 
 #endif /* !LOG_H */
